@@ -1,0 +1,28 @@
+﻿@model Contact
+
+@{
+    ViewBag.Title = $"Delete Contact";
+}
+
+<h2>Delete Contact</h2>
+
+<form asp-action="Delete" method="post">
+
+    <input type="hidden" asp-for="ContactId" />
+
+    <p>
+        Do you really want to delete <b>@Model.Firstname @Model.Lastname</b>?
+    </p>
+
+    @*User presses Yes; 
+        type="submit takes us to the HTTPPOST in the Contact Controller
+        for the Delete Contact Action*@
+    <button type="submit" class="btn btn-dark">Yes</button>
+
+    @*User presses No routes back to the Details view; 
+        the slug has the contact name with dashes instead of spaces*@
+    <a asp-action="Details" asp-controller="Contact"
+        asp-route-id="@Model.ContactId" asp-route-slug="@Model.Slug"
+        class="btn btn-dark">No</a>
+
+</form>
